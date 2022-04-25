@@ -14,6 +14,6 @@ jobs:
 
       - name: Lint
         run: |
-          pip install flake8
+          pip install pylint
           pip install pandas
-          flake8 main.py
+          pylint main.py

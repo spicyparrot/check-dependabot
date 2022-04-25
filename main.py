@@ -5,13 +5,13 @@ import pandas as pd
 
 
 # Functions
-def getHeader(token):
+def GetHeader(token):
     auth="Bearer " + token
-    dict={"Authorization": auth}
-    return dict
+    authdict={"Authorization": auth}
+    return authdict
 
-def runQuery(query,token): # A simple function to use requests.post to make the API call. Note the json= section.
-    head=getHeader(token)
+def RunQuery(query,token): #  A simple function to use requests.post to make the API call. Note the json= section.
+    head=GetHeader(token)
     request = requests.post('https://api.github.com/graphql', json={'query': query}, headers=head)
     if request.status_code == 200:
         response=request.json()
@@ -19,7 +19,7 @@ def runQuery(query,token): # A simple function to use requests.post to make the 
     else:
         raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
 
-def getAlerts(repo,owner,token): # A simple function to use requests.post to make the API call. Note the json= section.
+def GetAlerts(repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
     query = """
     {
@@ -42,7 +42,7 @@ def getAlerts(repo,owner,token): # A simple function to use requests.post to mak
     query=query.replace("REPO_OWNER",owner)
     query=query.replace("REPO_NAME",repo)
     # Query GitHub API
-    result=runQuery(query,token)
+    result=RunQuery(query,token)
     # Flatten into a dataframe
     rows=result['data']['repository']['vulnerabilityAlerts']['nodes']
     alerts=pd.json_normalize(rows)
@@ -56,7 +56,7 @@ def main():
     owner = os.environ["INPUT_REPO_OWNER"]
     token = os.environ["INPUT_GITHUB_TOKEN"]
     # Query GitHub for full alerts breakdown
-    alerts=getAlerts(repo,owner,token)
+    alerts=GetAlerts(repo,owner,token)
     # Meta data
     total_alerts=len(alerts)
     #TODO - severe vs critical etc 
