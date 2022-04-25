@@ -2,8 +2,8 @@ name: "Check Dependabot Alerts"
 description: "Checks Open Dependabot Vulnerabilty Alerts"
 author: "Craig Bath"
 inputs:
-  github_token:
-    description: "GitHub Repo Access Token"
+  github_personal_token:
+    description: "GitHub Personal Access Token"
 outputs:
   total_alerts:
     description: "Total Open Dependabot Alerts"

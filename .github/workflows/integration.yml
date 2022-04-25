@@ -10,7 +10,7 @@ jobs:
         id: selftest
         uses: spicyparrot/check-dependabot@trunk        #Check out yourself to test
         with:
-          github_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}
+          github_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
       - name: Check outputs
         run: |

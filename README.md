@@ -1,8 +1,7 @@
 # Python Container Action Template
 
-[![Action Template](https://img.shields.io/badge/Action%20Template-Python%20Container%20Action-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAM6wAADOsB5dZE0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVCiRhZG/SsMxFEZPfsVJ61jbxaF0cRQRcRJ9hlYn30IHN/+9iquDCOIsblIrOjqKgy5aKoJQj4O3EEtbPwhJbr6Te28CmdSKeqzeqr0YbfVIrTBKakvtOl5dtTkK+v4HfA9PEyBFCY9AGVgCBLaBp1jPAyfAJ/AAdIEG0dNAiyP7+K1qIfMdonZic6+WJoBJvQlvuwDqcXadUuqPA1NKAlexbRTAIMvMOCjTbMwl1LtI/6KWJ5Q6rT6Ht1MA58AX8Apcqqt5r2qhrgAXQC3CZ6i1+KMd9TRu3MvA3aH/fFPnBodb6oe6HM8+lYHrGdRXW8M9bMZtPXUji69lmf5Cmamq7quNLFZXD9Rq7v0Bpc1o/tp0fisAAAAASUVORK5CYII=)](https://github.com/jacobtomlinson/python-container-action)
-[![Actions Status](https://github.com/jacobtomlinson/python-container-action/workflows/Lint/badge.svg)](https://github.com/jacobtomlinson/python-container-action/actions)
-[![Actions Status](https://github.com/jacobtomlinson/python-container-action/workflows/Integration%20Test/badge.svg)](https://github.com/jacobtomlinson/python-container-action/actions)
+[![Integration Test](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml/badge.svg?branch=trunk)](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml)
+[![Lint](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml/badge.svg)](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml)
 
 This is a template for creating GitHub actions and contains a small Python application which will be built into a minimal [Container Action](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-a-docker-container-action). Our final container from this template is ~50MB, yours may be a little bigger once you add some code. If you want something smaller check out my [go-container-action template](https://github.com/jacobtomlinson/go-container-action/actions).
 
@@ -12,78 +11,49 @@ In `main.py` you will find a small example of accessing Action inputs and return
 
 Full article here - <https://jacobtomlinson.dev/posts/2019/creating-github-actions-in-python/>
 
+## Requirments
+
+- GitHub Personal Access Token secret
+
 ## Usage
 
 This is a simple python action that use the GitHub GraphQL API to check how many open Dependabot alerts are present on the current repository.
 
 This can be used to block merges/deployments if there are outstanding vulnerabilites.
 
-### Example workflow
+## Example workflow
 
 ```yaml
-name: My Workflow
-on: [push]
+name: Deploy to Prod
+on: workflow_dispatch
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    name: Deployment
     steps:
-    - uses: actions/checkout@master
-    - name: Run action
+      - name: Check Dependabot Alerts
+        id: alerts
+        uses: spicyparrot/check-dependabot@v1            
+        with:
+          github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
-      # Put your action repo here
-      uses: me/myaction@master
-
-      # Put an example of your mandatory inputs here
-      with:
-        myInput: world
+      - name: Check Open Alerts
+        run: |
+          test "${{ steps.alerts.outputs.total_alerts }}" == "0"
+      
+      - name: Deploy
+        run: |
+          print "No open vulnerabilities found. Running deployment now..."
 ```
 
 ### Inputs
 
 | Input                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `myInput`  | An example mandatory input    |
-| `anotherInput` _(optional)_  | An example optional input    |
+| `github_personal_token`  | A GitHub Access token with access to vulnerability alerts    |
 
 ### Outputs
 
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `myOutput`  | An example output (returns 'Hello world')    |
-
-## Examples
-
-> NOTE: People ❤️ cut and paste examples. Be generous with them!
-
-### Using the optional input
-
-This is how to use the optional input.
-
-```yaml
-with:
-  myInput: world
-  anotherInput: optional
-```
-
-### Using outputs
-
-Show people how to use your outputs in another action.
-
-```yaml
-steps:
-- uses: actions/checkout@master
-- name: Run action
-  id: myaction
-
-  # Put your action name here
-  uses: me/myaction@master
-
-  # Put an example of your mandatory arguments here
-  with:
-    myInput: world
-
-# Put an example of using your outputs here
-- name: Check outputs
-    run: |
-    echo "Outputs - ${{ steps.myaction.outputs.myOutput }}"
-```
+| `total_alerts`  | The total number of open alerts for your repository    |

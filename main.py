@@ -54,7 +54,7 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
 
 def main():
     # Get inputs from envars (GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>)
-    token = os.environ["INPUT_GITHUB_TOKEN"]
+    token = os.environ["INPUT_GITHUB_PERSONAL_TOKEN"]
     owner = os.environ["GITHUB_REPOSITORY_OWNER"]
     repo = os.environ["GITHUB_REPOSITORY"]
     repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
