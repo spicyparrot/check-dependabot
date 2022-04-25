@@ -24,7 +24,7 @@
         {
             "label": "Docker: Build & Test Action Image",
             "type": "shell",
-            "command": "docker image build . -t test-action && docker container run --env GITHUB_REPOSITORY=check-dependabot --env GITHUB_REPOSITORY_OWNER=spicyparrot --env INPUT_GITHUB_TOKEN=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 -- test-action",
+            "command": "docker image build . -t test-action && docker container run --env GITHUB_REPOSITORY=check-dependabot --env GITHUB_REPOSITORY_OWNER=spicyparrot --env INPUT_GITHUB_TOKEN=${input:githubToken} -- test-action",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -37,6 +37,11 @@
             "id": "tagSearch",
             "description": "Tag Pattern:",
             "default": "beta",
+            "type": "promptString"
+        },
+        {
+            "id": "githubToken",
+            "description": "GitHub Token:",
             "type": "promptString"
         }
     ]
