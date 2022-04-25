@@ -1,6 +1,6 @@
-name: "Check Dependabot Alerts"
-description: "Checks Open Dependabot Vulnerabilty Alerts"
-author: "Craig Bath"
+name: "Python Container Action Template"
+description: "Get started with Python Container actions"
+author: "Jacob Tomlinson"
 inputs:
   myInput:
     description: "Input to use"
@@ -8,8 +8,6 @@ inputs:
 outputs:
   myOutput:
     description: "Output from the action"
-  total_alerts:
-    description: "Total Open Dependabot Alerts"
 runs:
   using: "docker"
   image: "Dockerfile"

@@ -8,7 +8,6 @@ def main():
     my_output = f"Hello {my_input}"
 
     print(f"::set-output name=myOutput::{my_output}")
-    print(f"::set-output name=total_alerts::10")
 
 
 if __name__ == "__main__":
