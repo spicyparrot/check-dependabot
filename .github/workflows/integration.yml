@@ -17,7 +17,7 @@ jobs:
         run: |
           export ALERTS=${{ steps.alerts.outputs.total_alerts }}
           if [[ "$ALERTS" > 0 ]] ; then
-              echo "::warn ::⚠ $ALERTS Open Vulnerabilty Alerts Found"
+              echo "::warning ::$ALERTS Open Vulnerabilty Alerts Found"
           else
             echo "::debug ::✅ $ALERTS Open Vulnerabilty Alerts Found"
           fi

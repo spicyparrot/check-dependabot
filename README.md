@@ -16,6 +16,7 @@ This can be used to block merges/deployments if there are any outstanding vulner
 - Breakdown of alerts by severity (e.g. number of critical issues)
 - Investigation into using `GITHUB_TOKEN` instead of a personal access token
 - Paginate all results (currently limited to first 100 alerts which means `total_alerts` is not 100% accurate if a repo has more than 100 open alerts)
+- Better error logging for unauthorised token
 
 ## Example workflow
 
@@ -35,7 +36,7 @@ jobs:
 
       - name: Error Exit
         if: steps.alerts.outputs.total_alerts > 0
-        run: echo "::error ::⚠ Open Vulnerabilty Alerts Found" && exit 1
+        run: echo "::error ::Open Vulnerabilty Alerts Found" && exit 1
       
       - name: Deploy
         run: |
