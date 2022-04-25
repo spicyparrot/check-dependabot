@@ -35,7 +35,7 @@ jobs:
 
       - name: Error Exit
         if: steps.alerts.outputs.total_alerts > 0
-        run: echo "::error ::⚠ ${{steps.alerts.outputs.total_alerts}} Open Vulnerabilty Alerts Found" && exit 1
+        run: echo "::error ::⚠ Open Vulnerabilty Alerts Found" && exit 1
       
       - name: Deploy
         run: |
