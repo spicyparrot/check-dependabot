@@ -60,10 +60,10 @@ def main():
     # Query GitHub for full alerts breakdown
     alerts=get_alerts(repo,owner,token)
     # Meta data
-    total_alerts=len(alerts)
+    totalAlerts=len(alerts)
     #TODO - severe vs critical etc 
     #Set Outputs
-    print(f"::set-output name=total_alerts::{total_alerts}")
+    print(f"::set-output name=total_alerts::{totalAlerts}")
 
 
 if __name__ == "__main__":
