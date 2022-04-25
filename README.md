@@ -20,7 +20,7 @@ This can be used to block merges/deployments if there are any outstanding vulner
 ## Example workflow
 
 ```yaml
-name: Deploy to Prod
+name: 🚀 Deploy to Prod
 on: workflow_dispatch
 jobs:
   deploy:
