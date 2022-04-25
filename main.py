@@ -53,9 +53,8 @@ def getAlerts(repo,owner,token): # A simple function to use requests.post to mak
     # Return the number of alerts to console
     return alerts
 
-# GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>
 def main():
-    # Get inputs from envars
+    # Get inputs from envars (GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>)
     repo = os.environ["INPUT_REPO"]
     owner = os.environ["INPUT_REPO_OWNER"]
     token = os.environ["INPUT_GITHUB_TOKEN"]
