@@ -11,6 +11,12 @@ This can be used to block merges/deployments if there are any outstanding vulner
 
 - A GitHub personal access token that has permissions to view vulnerabilty alerts of a repo
 
+## Future Work
+
+- Breakdown of alerts by severity (e.g. number of critical issues)
+- Investigation into using `GITHUB_TOKEN` instead of a personal access token
+- Paginate all results (currently limited to first 100 alerts which means `total_alerts` is not 100% accurate)
+
 ## Example workflow
 
 ```yaml
