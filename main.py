@@ -6,6 +6,7 @@ import json
 import pprint as pp
 import pandas as pd
 
+
 # GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>
 def main():
     my_input = os.environ["INPUT_MYINPUT"]
