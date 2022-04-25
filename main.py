@@ -6,9 +6,10 @@ def main():
     my_input = os.environ["INPUT_MYINPUT"]    #GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>
 
     my_output = f"Hello {my_input}"
+    total_alerts = f"10"
 
     print(f"::set-output name=myOutput::{my_output}")
-    print(f"::set-output name=total_alerts::10")
+    print(f"::set-output name=total_alerts::{total_alerts}")
 
 
 if __name__ == "__main__":
