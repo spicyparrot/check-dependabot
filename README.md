@@ -27,18 +27,13 @@ jobs:
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
-      - name: View Outputs
-        run: |
-          export ALERTS=${{ steps.alerts.outputs.total_alerts }}
-          if [[ "$ALERTS" > 0 ]] ; then
-              echo "::error ::⚠ $ALERTS Open Vulnerabilty Alerts Found" && exit 1
-          else
-            echo "::debug ::✅ $ALERTS Open Vulnerabilty Alerts Found"
-          fi
+      - name: Error Exit
+        if: steps.alerts.outputs.total_alerts > 0
+        run: echo "::error ::⚠ $ALERTS Open Vulnerabilty Alerts Found" && exit 1
       
       - name: Deploy
         run: |
-          print "No open vulnerabilities found. Running deployment now..."
+          printf "No open vulnerabilities found. Running deployment now..."
 ```
 
 ### Inputs
