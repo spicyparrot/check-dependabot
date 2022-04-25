@@ -1,7 +1,4 @@
-#########################################################
-#### Querying GitHub API for open Dependabot Alerts #####
-#########################################################
-
+# Querying GitHub API for open Dependabot Alerts #####
 import os
 import requests
 import sys
