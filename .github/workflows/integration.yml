@@ -6,13 +6,20 @@ jobs:
     name: Test Action
     steps:
       - uses: actions/checkout@v2
-      - name: Self test
+      - name: Self Test
         id: selftest
         uses: spicyparrot/check-dependabot@trunk        #Check out yourself to test
         with:
           token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
-      - name: Check outputs
+      - name: View Outputs
+        env:
+          RED: '\033[0;31m'
+          GREEN: '\033[0;32m'
         run: |
-          test "${{ steps.selftest.outputs.total_alerts }}" != ""
-          printf ${{ steps.selftest.outputs.total_alerts }}
+          export ALERTS=${{ steps.selftest.outputs.total_alerts }}
+          if [[ "$ALERTS" > 0 ]] ; then
+              echo "::warn ::⚠ $ALERTS Open Vulnerabilty Alerts Found"
+          else
+            printf "${GREEN}✅ $ALERTS Open Vulnerabilty Alerts Found\n"
+          fi
