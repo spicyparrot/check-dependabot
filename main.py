@@ -21,6 +21,7 @@ def run_query(query,token):
         raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
 
 def get_alerts(repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
+    # TODO - get around the pagination limits for accurate total issues
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
     query = """
     {
@@ -58,7 +59,7 @@ def main():
     repo = os.environ["GITHUB_REPOSITORY"]
     repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
-    alerts=get_alerts(owner,repo,token)
+    alerts=get_alerts(repo,owner,token)
     # Meta data
     totalAlerts=len(alerts)
     #TODO - severe vs critical etc 
