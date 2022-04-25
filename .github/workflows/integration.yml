@@ -4,13 +4,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - name: Self test
         id: selftest
-        
-        # Put your action repo here
-        uses: spicyparrot/check-dependabot@trunk
+        uses: spicyparrot/check-dependabot@trunk        #Check out yourself to test
 
       - name: Check outputs
         run: |
           test "${{ steps.selftest.outputs.myOutput }}" == "Hello world"
+          printf ${{ steps.selftest.outputs.total_alerts }}
