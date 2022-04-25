@@ -1,6 +1,13 @@
-import os
-import requests  # noqa We are just importing this to prove the dependency installed correctly
+#########################################################
+#### Querying GitHub API for open Dependabot Alerts #####
+#########################################################
 
+import os
+import requests
+import sys
+import json
+import pprint as pp
+import pandas as pd
 
 # GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>
 def main():
