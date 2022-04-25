@@ -13,4 +13,3 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-
