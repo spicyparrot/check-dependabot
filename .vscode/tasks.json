@@ -1,0 +1,43 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+
+    // Override the default shell (https://stackoverflow.com/questions/54810355/how-to-run-task-in-another-terminal-with-vscode-integrated-terminal)
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "wsl.exe"
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "Git: Delete Remote & Local Tags",
+            "type": "shell",
+            "command": "git fetch --prune --prune-tags && export TAGS=$(git tag|grep  ${input:tagSearch}) && git push ${REMOTE_NAME:-origin} --delete $TAGS && git tag -d $TAGS",
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }
+        },
+        {
+            "label": "Docker: Build & Test Action Image",
+            "type": "shell",
+            "command": "docker image build . -t test-action && docker container run --env GITHUB_REPOSITORY=check-dependabot --env GITHUB_REPOSITORY_OWNER=spicyparrot --env INPUT_GITHUB_TOKEN=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 -- test-action",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+    ],
+    "inputs": [
+        {
+            "id": "tagSearch",
+            "description": "Tag Pattern:",
+            "default": "beta",
+            "type": "promptString"
+        }
+    ]
+}
