@@ -1,5 +1,5 @@
 name: "Check Dependabot Alerts"
-description: "Checks Open Dependabot Vulnerabilty Alerts"
+description: "Check how many open Dependabot alerts are present on the current repository."
 author: "Craig Bath"
 branding:
   icon: "alert-circle"
