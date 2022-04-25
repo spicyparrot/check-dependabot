@@ -14,13 +14,15 @@ Full article here - <https://jacobtomlinson.dev/posts/2019/creating-github-actio
 
 ## Usage
 
-Describe how to use your action here.
+This is a simple python action that use the GitHub GraphQL API to check how many open Dependabot alerts are present on the current repository.
+
+This can be used to block merges/deployments if there are outstanding vulnerabilites.
 
 ### Example workflow
 
 ```yaml
 name: My Workflow
-on: [push, pull_request]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
