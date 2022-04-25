@@ -24,7 +24,7 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
     query = """
     {
-        repository(name: "REPO_NAME", owner: "REPO_OWNER") {
+        repository(name: "spicyparrot", owner: "spicyparrot-backend") {
             vulnerabilityAlerts(first: 100,states: OPEN) {
                 nodes {
                     state
