@@ -10,8 +10,6 @@ jobs:
         id: selftest
         uses: spicyparrot/check-dependabot@trunk        #Check out yourself to test
         with:
-          repo: ${{ github.event.repository.name }}
-          repo_owner: ${{ github.repository_owner }} 
           github_token: ${{ github.token }}
 
       - name: Check outputs
