@@ -45,9 +45,9 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     # Query GitHub API
     result=run_query(query,token)
     # Flatten into a dataframe
+    print(result)
     rows=result['data']['repository']['vulnerabilityAlerts']['nodes']
     alerts=pd.json_normalize(rows)
-
     # Return the number of alerts to console
     return alerts
 
