@@ -11,5 +11,5 @@ jobs:
 
       - name: Check outputs
         run: |
-          test "${{ steps.selftest.outputs.myOutput }}" == "Hello world"
+          test "${{ steps.selftest.outputs.total_alerts }}" != ""
           printf ${{ steps.selftest.outputs.total_alerts }}

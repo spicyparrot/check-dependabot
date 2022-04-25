@@ -2,12 +2,13 @@ name: "Check Dependabot Alerts"
 description: "Checks Open Dependabot Vulnerabilty Alerts"
 author: "Craig Bath"
 inputs:
-  myInput:
-    description: "Input to use"
-    default: "world"
+  repo:
+    description: "Github Repo"
+  repo_owner:
+    description: "GitHub Repo Owner"
+  github_token:
+    description: "GitHub Repo Access Token"
 outputs:
-  myOutput:
-    description: "Output from the action"
   total_alerts:
     description: "Total Open Dependabot Alerts"
 runs:
