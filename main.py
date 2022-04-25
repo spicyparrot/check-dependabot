@@ -18,7 +18,7 @@ def run_query(query,token):
         response=request.json()
         return response
     else:
-        raise Exception("Query failed to run by returning code of {} and error {}. {}".format(request.status_code, query))
+        raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
 
 def get_alerts(repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
