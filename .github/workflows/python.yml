@@ -14,6 +14,5 @@ jobs:
 
       - name: Lint
         run: |
-          pip install pylint
-          pip install pandas
+          pip install pylint requests pandas
           pylint main.py -E
