@@ -2,6 +2,7 @@ import os
 import requests  # noqa We are just importing this to prove the dependency installed correctly
 
 
+# GitHub converts all inputs into INPUT_<UPPER CASE OF INPUT>
 def main():
     my_input = os.environ["INPUT_MYINPUT"]
 
