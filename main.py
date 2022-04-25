@@ -24,7 +24,7 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
     query = """
     {
-        repository(name: "spicyparrot", owner: "spicyparrot-backend") {
+        repository(name: "REPO_NAME", owner: "REPO_OWNER") {
             vulnerabilityAlerts(first: 100,states: OPEN) {
                 nodes {
                     state
@@ -40,8 +40,8 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     }
     """
     # Parameterise the name/owner of the repo
-    query=query.replace("REPO_OWNER",owner)
     query=query.replace("REPO_NAME",repo)
+    query=query.replace("REPO_OWNER",owner)
     # Query GitHub API
     result=run_query(query,token)
     # Flatten into a dataframe
@@ -58,7 +58,7 @@ def main():
     repo = os.environ["GITHUB_REPOSITORY"]
     repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
-    alerts=get_alerts(repo,owner,token)
+    alerts=get_alerts(owner,repo,token)
     # Meta data
     totalAlerts=len(alerts)
     #TODO - severe vs critical etc 
