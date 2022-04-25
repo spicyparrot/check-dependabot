@@ -1,6 +1,9 @@
 name: "Check Dependabot Alerts"
 description: "Checks Open Dependabot Vulnerabilty Alerts"
 author: "Craig Bath"
+branding:
+  icon: "alert-circle"
+  color: "purple"
 inputs:
   github_personal_token:
     description: "GitHub Personal Access Token"
@@ -10,3 +13,4 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+
