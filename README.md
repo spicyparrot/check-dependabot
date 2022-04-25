@@ -1,25 +1,15 @@
-# Python Container Action Template
+# Check for Dependabot Vulnerabilty Alerts
 
 [![Integration Test](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml/badge.svg?branch=trunk)](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml)
 [![Lint](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml/badge.svg)](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml)
 
-This is a template for creating GitHub actions and contains a small Python application which will be built into a minimal [Container Action](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-a-docker-container-action). Our final container from this template is ~50MB, yours may be a little bigger once you add some code. If you want something smaller check out my [go-container-action template](https://github.com/jacobtomlinson/go-container-action/actions).
+This is a simple python action that uses the GitHub GraphQL API to check how many open Dependabot alerts are present on the current repository.
 
-In `main.py` you will find a small example of accessing Action inputs and returning Action outputs. For more information on communicating with the workflow see the [development tools for GitHub Actions](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/development-tools-for-github-actions).
-
-> 🏁 To get started, click the `Use this template` button on this repository [which will create a new repository based on this template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/).
-
-Full article here - <https://jacobtomlinson.dev/posts/2019/creating-github-actions-in-python/>
+This can be used to block merges/deployments if there are any outstanding vulnerabilites that need to be resolved first.
 
 ## Requirments
 
-- GitHub Personal Access Token secret
-
-## Usage
-
-This is a simple python action that use the GitHub GraphQL API to check how many open Dependabot alerts are present on the current repository.
-
-This can be used to block merges/deployments if there are outstanding vulnerabilites.
+- A GitHub personal access token that has permissions to view vulnerabilty alerts of a repo
 
 ## Example workflow
 
