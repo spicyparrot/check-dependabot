@@ -7,15 +7,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Self Test
-        id: selftest
+      - name: Check Dependabot Alerts
+        id: alerts
         uses: spicyparrot/check-dependabot@trunk        #Check out yourself to test
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
       - name: View Outputs
         run: |
-          export ALERTS=${{ steps.selftest.outputs.total_alerts }}
+          export ALERTS=${{ steps.alerts.outputs.total_alerts }}
           if [[ "$ALERTS" > 0 ]] ; then
               echo "::warn ::⚠ $ALERTS Open Vulnerabilty Alerts Found"
           else
