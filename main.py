@@ -1,9 +1,6 @@
 # Querying GitHub API for open Dependabot Alerts #####
 import os
 import requests
-import sys
-import json
-import pprint as pp
 import pandas as pd
 
 
