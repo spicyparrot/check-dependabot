@@ -2,10 +2,6 @@ name: "Check Dependabot Alerts"
 description: "Checks Open Dependabot Vulnerabilty Alerts"
 author: "Craig Bath"
 inputs:
-  repo:
-    description: "Github Repo"
-  repo_owner:
-    description: "GitHub Repo Owner"
   github_token:
     description: "GitHub Repo Access Token"
 outputs:

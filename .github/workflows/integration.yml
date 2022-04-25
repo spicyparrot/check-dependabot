@@ -1,8 +1,9 @@
 name: Integration Test
 on: [push]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    name: Test Action
     steps:
       - uses: actions/checkout@v2
       - name: Self test
