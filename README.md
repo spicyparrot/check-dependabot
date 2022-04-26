@@ -48,10 +48,7 @@ jobs:
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
 | `total_alerts`  | The total number of open alerts for your repository    |
-<<<<<<< HEAD
 | `critical_alerts`  | Number of open critical alerts    |
 | `high_alerts`  | Number of open high alerts    |
 | `moderate_alerts`  | Number of open moderate alerts   |
 | `low_alerts`  | Number of open low alerts    |
-=======
->>>>>>> 34099ecc904c1caf79db6c9a764ecbdbdc00e10f
