@@ -49,7 +49,10 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     pp.pprint(result)
     # Flatten into a dataframe
     rows=result['data']['repository']['vulnerabilityAlerts']['nodes']
-    alerts=pd.json_normalize(rows)
+    rows=pd.json_normalize(rows)
+    # Append into an empty state to handle 0 rows
+    alerts=pd.DataFrame(columns = ['state','securityVulnerability.severity','createdAt','dismissedAt'])
+    alerts = alerts.append(rows)
     alerts=alerts.rename(columns={"securityVulnerability.severity": "severity"})
     # Return the number of alerts to console
     return alerts
@@ -62,6 +65,7 @@ def main():
     repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
     alerts=get_alerts(repo,owner,token)
+    pp.pprint(alerts)
     # Breakdown stats
     statsDict={"total_alerts": len(alerts)}
     statsDict['critical_alerts']=len(alerts.loc[alerts['severity'] == 'CRITICAL'])
