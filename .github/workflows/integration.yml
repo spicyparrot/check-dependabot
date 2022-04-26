@@ -13,10 +13,6 @@ jobs:
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
-      - name: View Outputs
+      - name: View Breakdown
         run: |
-          echo "::warning ::${{steps.alerts.outputs.total_alerts}} Open Vulnerability Alerts"
-          echo "::warning ::${{steps.alerts.outputs.critical_alerts}} Critical Alerts "
-          echo "::warning ::${{steps.alerts.outputs.high_alerts}} High Alerts"
-          echo "::warning ::${{steps.alerts.outputs.moderate_alerts}} Moderate Alerts"
-          echo "::warning ::${{steps.alerts.outputs.lower_alerts}} Low Alerts"
+          echo "::warning ::${{steps.alerts.outputs.total_alerts}} Open Vulnerability Alerts\n {{steps.alerts.outputs.critical_alerts}} Critical Alerts\n ${{steps.alerts.outputs.high_alerts}} High Alerts\n ${{steps.alerts.outputs.moderate_alerts}} Moderate Alerts\n ${{steps.alerts.outputs.lower_alerts}} Low Alerts"
