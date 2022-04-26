@@ -2,6 +2,7 @@
 import os
 import requests
 import pandas as pd
+import pprint as pp
 
 
 # Functions
@@ -45,10 +46,11 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
     query=query.replace("REPO_OWNER",owner)
     # Query GitHub API
     result=run_query(query,token)
+    pp.pprint(result)
     # Flatten into a dataframe
-    print(result)
     rows=result['data']['repository']['vulnerabilityAlerts']['nodes']
     alerts=pd.json_normalize(rows)
+    alerts=alerts.rename(columns={"securityVulnerability.severity": "severity"})
     # Return the number of alerts to console
     return alerts
 
@@ -60,11 +62,19 @@ def main():
     repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
     alerts=get_alerts(repo,owner,token)
-    # Meta data
-    totalAlerts=len(alerts)
-    #TODO - severe vs critical etc 
+    # Breakdown stats
+    statsDict={"total_alerts": len(alerts)}
+    statsDict['critical_alerts']=len(alerts.loc[alerts['severity'] == 'CRITICAL'])
+    statsDict['high_alerts']=len(alerts.loc[alerts['severity'] == 'HIGH'])
+    statsDict['moderate_alerts']=len(alerts.loc[alerts['severity'] == 'MODERATE'])
+    statsDict['low_alerts']=len(alerts.loc[alerts['severity'] == 'LOW'])
+    pp.pprint(statsDict)
     #Set Outputs
-    print(f"::set-output name=total_alerts::{totalAlerts}")
+    print(f"::set-output name=total_alerts::{statsDict['total_alerts']}")
+    print(f"::set-output name=critical_alerts::{statsDict['critical_alerts']}")
+    print(f"::set-output name=high_alerts::{statsDict['high_alerts']}")
+    print(f"::set-output name=moderate_alerts::{statsDict['moderate_alerts']}")
+    print(f"::set-output name=low_alerts::{statsDict['low_alerts']}")
 
 
 if __name__ == "__main__":

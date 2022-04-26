@@ -9,7 +9,15 @@ inputs:
     description: "GitHub Personal Access Token"
 outputs:
   total_alerts:
-    description: "Total Open Dependabot Alerts"
+    description: "Total Open Alerts"
+  critical_alerts:
+    description: "Open Critical Alerts"
+  high_alerts:
+    description: "Open High Alertss"
+  moderate_alerts:
+    description: "Open Moderate Alerts"
+  low_alerts:
+    description: "Open Lower Alerts"
 runs:
   using: "docker"
   image: "Dockerfile"
