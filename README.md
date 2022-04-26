@@ -3,7 +3,7 @@
 [![Integration Test](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml/badge.svg?branch=trunk)](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml)
 [![Lint](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml/badge.svg)](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml)
 
-This is a simple python action that uses the GitHub GraphQL API to check how many open Dependabot alerts are present on the current repository.
+This is a simple python action that uses the [GitHub GraphQL API](https://docs.github.com/en/graphql/reference/objects#repositoryvulnerabilityalert) to check how many open Dependabot vulnerability alerts are present on a repository.
 
 This can be used to block merges/deployments if there are any outstanding vulnerabilites that need to be resolved first.
 
