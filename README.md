@@ -1,4 +1,4 @@
-# Check for Dependabot Vulnerabilty Alerts
+# Check for Dependabot Vulnerability Alerts
 
 [![Integration Test](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml/badge.svg?branch=trunk)](https://github.com/spicyparrot/check-dependabot/actions/workflows/integration.yml)
 [![Lint](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml/badge.svg)](https://github.com/spicyparrot/check-dependabot/actions/workflows/python.yml)
@@ -9,7 +9,7 @@ This can be used to block merges/deployments if there are any outstanding vulner
 
 ## Requirments
 
-- A GitHub personal access token that has permissions to view vulnerabilty alerts of a repo
+- A GitHub personal access token that has permissions to view vulnerability alerts of a repo
 
 ## Example workflow
 
@@ -29,7 +29,7 @@ jobs:
 
       - name: Error Exit
         if: steps.alerts.outputs.total_alerts > 0
-        run: echo "::error ::Open Vulnerabilty Alerts Found" && exit 1
+        run: echo "::error ::Open Vulnerability Alerts Found" && exit 1
       
       - name: Deploy
         run: |
