@@ -47,10 +47,3 @@ jobs:
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
 | `total_alerts`  | The total number of open alerts for your repository    |
-
-## Future Work
-
-- Breakdown of alerts by severity (e.g. number of critical issues)
-- Investigation into using `GITHUB_TOKEN` instead of a personal access token
-- Paginate all results (currently limited to first 100 alerts which means `total_alerts` is not 100% accurate if a repo has more than 100 open alerts)
-- Better error logging for unauthorised token
