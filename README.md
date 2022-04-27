@@ -7,7 +7,7 @@ This is a simple python action that uses the [GitHub GraphQL API](https://docs.g
 
 This can be used to block merges/deployments if there are any outstanding vulnerabilites that need to be resolved first.
 
-## Requirments
+## Requirements
 
 - GitHub personal access token that has permissions to view vulnerabilty alerts of a repo. A guide on how to create one can be found [here](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - GitHub secret containing your access token.
