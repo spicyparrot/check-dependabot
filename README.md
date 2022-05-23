@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Check Dependabot Alerts
         id: alerts
-        uses: spicyparrot/check-dependabot@trunk
+        uses: spicyparrot/check-dependabot@v1.2.0
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
