@@ -62,10 +62,9 @@ def main():
     token = os.environ["INPUT_GITHUB_PERSONAL_TOKEN"]
     owner = os.environ["GITHUB_REPOSITORY_OWNER"]
     repo = os.environ["GITHUB_REPOSITORY"]
-    repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
-    summaryFile = os.environ["GITHUB_STEP_SUMMARY"]
+    repoName = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
-    alerts=get_alerts(repo,owner,token)
+    alerts=get_alerts(repoName,owner,token)
     pp.pprint(alerts)
     # Breakdown stats
     statsDict={"total_alerts": len(alerts)}
@@ -81,12 +80,16 @@ def main():
     print(f"::set-output name=moderate_alerts::{statsDict['moderate_alerts']}")
     print(f"::set-output name=low_alerts::{statsDict['low_alerts']}")
     #Create markdown summary
-    summary=alerts.groupby('severity')['createdAt'].count().reset_index(name="issues")
+    summaryFile = os.environ["GITHUB_STEP_SUMMARY"]  #https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
+    summary = {'Severity': ['CRITICAL','HIGH','MODERATE','LOW'], 'Open Issues': list( map(statsDict.get,['critical_alerts','high_alerts','moderate_alerts','low_alerts']))}
+    summary = pd.DataFrame(data=summary)
+    summary=summary.set_index('Severity')
     summaryMD=summary.to_markdown()
+    summaryText=f"## Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities](https://github.com/{repo}/security/dependabot).\n"
     with open(summaryFile, "a") as myfile:
+        myfile.write("")
+        myfile.write(summaryText)
         myfile.write(summaryMD)
 
 if __name__ == "__main__":
     main()
-
-
