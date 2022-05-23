@@ -52,3 +52,9 @@ jobs:
 | `high_alerts`  | Number of open high alerts    |
 | `moderate_alerts`  | Number of open moderate alerts   |
 | `low_alerts`  | Number of open low alerts    |
+
+### GitHub Summary
+
+Utilising GitHub [job summaries](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary), a table with the breakdown of alerts is now visible as part of the action summary section:
+
+![summary](docs/screenshots/github_summary.png)
