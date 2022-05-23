@@ -3,7 +3,7 @@ import os
 import requests
 import pandas as pd
 import pprint as pp
-
+import tabulate as tb
 
 # Functions
 def get_header(token):
@@ -41,7 +41,7 @@ def get_alerts(repo,owner,token): #  A simple function to use requests.post to m
         }
     }
     """
-    # Parameterise the name/owner of the repo
+    # Parameterise the name/owner of the repo (TODO - multi-line f string)
     query=query.replace("REPO_NAME",repo)
     query=query.replace("REPO_OWNER",owner)
     # Query GitHub API
@@ -62,9 +62,9 @@ def main():
     token = os.environ["INPUT_GITHUB_PERSONAL_TOKEN"]
     owner = os.environ["GITHUB_REPOSITORY_OWNER"]
     repo = os.environ["GITHUB_REPOSITORY"]
-    repo = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
+    repoName = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
-    alerts=get_alerts(repo,owner,token)
+    alerts=get_alerts(repoName,owner,token)
     pp.pprint(alerts)
     # Breakdown stats
     statsDict={"total_alerts": len(alerts)}
@@ -92,5 +92,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
