@@ -79,7 +79,16 @@ def main():
     print(f"::set-output name=high_alerts::{statsDict['high_alerts']}")
     print(f"::set-output name=moderate_alerts::{statsDict['moderate_alerts']}")
     print(f"::set-output name=low_alerts::{statsDict['low_alerts']}")
-
+    #Create markdown summary
+    summaryFile = os.environ["GITHUB_STEP_SUMMARY"]  #https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
+    summary = {'Severity': ['CRITICAL','HIGH','MODERATE','LOW'], 'Open Issues': list( map(statsDict.get,['critical_alerts','high_alerts','moderate_alerts','low_alerts']))}
+    summary = pd.DataFrame(data=summary)
+    summary=summary.set_index('Severity')
+    summaryMD=summary.to_markdown()
+    summaryText=f"## ⚠ Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities](https://github.com/{repo}/security/dependabot).\n"
+    with open(summaryFile, "a") as myfile:
+        myfile.write(summaryText)
+        myfile.write(summaryMD)
 
 if __name__ == "__main__":
     main()
