@@ -85,9 +85,8 @@ def main():
     summary = pd.DataFrame(data=summary)
     summary=summary.set_index('Severity')
     summaryMD=summary.to_markdown()
-    summaryText=f"## Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities](https://github.com/{repo}/security/dependabot).\n"
+    summaryText=f"## ⚠ Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities](https://github.com/{repo}/security/dependabot).\n"
     with open(summaryFile, "a") as myfile:
-        myfile.write("")
         myfile.write(summaryText)
         myfile.write(summaryMD)
 
