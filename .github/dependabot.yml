@@ -2,11 +2,9 @@ version: 2
 updates:
   - package-ecosystem: 'pip'
     directory: '/'
-    versioning-strategy: increase
     open-pull-requests-limit: 10
     target-branch: 'trunk'
     rebase-strategy: "auto"
-    versioning-strategy: increase
     schedule:
       interval: 'monthly'
     labels:
@@ -18,11 +16,9 @@ updates:
 
   - package-ecosystem: 'docker'
     directory: '/'
-    versioning-strategy: increase
     open-pull-requests-limit: 10
     target-branch: 'trunk'
     rebase-strategy: "auto"
-    versioning-strategy: increase
     schedule:
       interval: 'monthly'
     labels:
