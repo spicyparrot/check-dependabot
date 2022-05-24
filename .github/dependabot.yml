@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: 'pip'
+    directory: '/'
+    versioning-strategy: increase
+    open-pull-requests-limit: 10
+    target-branch: 'trunk'
+    rebase-strategy: "auto"
+    versioning-strategy: increase
+    schedule:
+      interval: 'monthly'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'deps'
+    pull-request-branch-name:
+      separator: "-"
+
+  - package-ecosystem: 'docker'
+    directory: '/'
+    versioning-strategy: increase
+    open-pull-requests-limit: 10
+    target-branch: 'trunk'
+    rebase-strategy: "auto"
+    versioning-strategy: increase
+    schedule:
+      interval: 'monthly'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'deps'
+    pull-request-branch-name:
+      separator: "-"
