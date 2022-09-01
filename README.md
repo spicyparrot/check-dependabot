@@ -5,11 +5,11 @@
 
 This is a simple python action that uses the [GitHub GraphQL API](https://docs.github.com/en/graphql/reference/objects#repositoryvulnerabilityalert) to check how many open Dependabot vulnerability alerts are present on a repository.
 
-This can be used to block merges/deployments if there are any outstanding vulnerabilites that need to be resolved first.
+This can be used to block merges/deployments if there are any outstanding vulnerabilities that need to be resolved first.
 
 ## Requirements
 
-- GitHub personal access token that has permissions to view vulnerabilty alerts of a repo. A guide on how to create one can be found [here](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- GitHub personal access token that has permissions to view vulnerability alerts of a repo. A guide on how to create one can be found [here](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - GitHub secret containing your access token.
 
 ## Example workflow
@@ -55,6 +55,6 @@ jobs:
 
 ### GitHub Summary
 
-Utilising GitHub [job summaries](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary), a table with the breakdown of alerts is now visible as part of the action summary section:
+Utilizing GitHub [job summaries](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary), a table with the breakdown of alerts is now visible as part of the action summary section:
 
 ![summary](docs/screenshots/github_summary.png)
