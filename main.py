@@ -15,7 +15,7 @@ def get_api_url():
     if "GITHUB_API_URL" in os.environ:
         url = os.environ["GITHUB_API_URL"]
     else:
-        url = 'https://api.github.com'
+        url = 'https://api.github.com/graphql'
     
     return url
 
@@ -28,7 +28,7 @@ def run_query(query,token):
         response=request.json()
         return response
     else:
-        raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
+        raise Exception("Query failed to run by returning code of {}".format(request.status_code))
 
 def get_alerts(repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
     # TODO - get around the pagination limits for accurate total issues
