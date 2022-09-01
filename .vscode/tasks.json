@@ -22,9 +22,9 @@
             }
         },
         {
-            "label": "Docker: Build & Test Action Image",
+            "label": "Docker: Build & Test Dependabot Action",
             "type": "shell",
-            "command": "docker image build . -t test-action && docker container run --env GITHUB_REPOSITORY=check-dependabot --env GITHUB_REPOSITORY_OWNER=spicyparrot --env INPUT_GITHUB_TOKEN=${input:githubToken} -- test-action",
+            "command": "docker image build . -t test-action && docker container run --env GITHUB_REPOSITORY=check-dependabot --env GITHUB_REPOSITORY_OWNER=spicyparrot --env INPUT_GITHUB_PERSONAL_TOKEN=${input:githubToken} -- test-action",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
