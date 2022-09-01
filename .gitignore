@@ -1,0 +1,18 @@
+# Local code execution files
+node_modules
+build
+!.github/actions/build
+
+# Access keys & Secrets
+.env
+**/secrets
+**.pem
+**.ppk
+
+# Developers using a mac
+**/.DS_Store
+
+# Python
+**/*.ipynb_checkpoints
+**/__pycache__
+**/.pytest_cache
