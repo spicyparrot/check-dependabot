@@ -12,8 +12,10 @@ def get_header(token):
     return authdict
 
 def get_api_url():
+    if "GITHUB_GRAPHQL_URL" in os.environ:
+        url = os.environ["GITHUB_GRAPHQL_URL"]
     if "GITHUB_API_URL" in os.environ:
-        url = os.environ["GITHUB_API_URL"]
+        url = os.environ["GITHUB_API_URL"] + '/graphql'
     else:
         url = 'https://api.github.com/graphql'
     

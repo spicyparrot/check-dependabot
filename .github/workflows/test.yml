@@ -42,3 +42,8 @@ jobs:
           echo "::warning ::${{steps.alerts.outputs.high_alerts}} High Alerts"
           echo "::warning ::${{steps.alerts.outputs.moderate_alerts}} Moderate Alerts"
           echo "::warning ::${{steps.alerts.outputs.lower_alerts}} Low Alerts"
+
+      - name: 🐛 Debugger
+        if: failure()
+        uses: mxschmitt/action-tmate@v3     #https://github.com/marketplace/actions/debugging-with-tmate  + https://blog.fleetdm.com/4-tips-for-github-actions-usability-2-debugging-4c0c920adfde
+        timeout-minutes: 5
