@@ -31,6 +31,16 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "Docker: Start Jupyter Notebook on localhost:8888",
+            "type": "shell",
+            "command": "export DOCKER_BUILDKIT=0 && docker image build -f docs/analysis/build/images/python.Dockerfile -t local-python . && docker run -it -p 8888:8888 -v $(pwd)/docs/analysis/notebooks:/opt/notebooks/ local-python",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
     ],
     "inputs": [
         {
