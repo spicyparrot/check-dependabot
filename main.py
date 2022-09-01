@@ -11,7 +11,7 @@ def get_header(token):
     authdict={"Authorization": auth}
     return authdict
 
-def get_api_url:
+def get_api_url():
     if "GITHUB_API_URL" in os.environ:
         url = os.environ["GITHUB_API_URL"]
     else:
