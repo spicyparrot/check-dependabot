@@ -1,14 +1,11 @@
-FROM python:3.7-slim AS builder
+# Minimal python
+FROM python:3.8.10-slim AS builder
+
+# Add repo code & install dependencies
 ADD . /app
 WORKDIR /app
+RUN pip install -r requirements.txt --target=/app
 
-# We are installing a dependency here directly into our app source dir
-RUN pip install --target=/app requests numpy pandas tabulate
-
-# A distroless container image with Python and some basics like SSL certificates
-# https://github.com/GoogleContainerTools/distroless
-FROM gcr.io/distroless/python3-debian10
-COPY --from=builder /app /app
-WORKDIR /app
-ENV PYTHONPATH /app
-CMD ["/app/main.py"]
+# Start command
+ENTRYPOINT ["python3"]
+CMD ["main.py"]

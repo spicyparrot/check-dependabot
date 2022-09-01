@@ -1,0 +1,43 @@
+name: 🧪 Test
+on: 
+  push:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: 📝 Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8.10"
+      
+      - name: Checkout Code
+      - uses: actions/checkout@v3
+
+      - name: Lint
+        run: |
+          pip install pylint
+          pip install -r requirements.txt
+          pylint main.py -E
+
+  test:
+    name: 🔬 Test Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Check Dependabot Alerts
+        id: alerts
+        uses: spicyparrot/check-dependabot@trunk              # Check out yourself to test
+        with:
+          github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
+
+      - name: View Outputs
+        run: |
+          echo "::warning ::${{steps.alerts.outputs.total_alerts}} Open Vulnerability Alerts"
+          echo "::warning ::${{steps.alerts.outputs.critical_alerts}} Critical Alerts "
+          echo "::warning ::${{steps.alerts.outputs.high_alerts}} High Alerts"
+          echo "::warning ::${{steps.alerts.outputs.moderate_alerts}} Moderate Alerts"
+          echo "::warning ::${{steps.alerts.outputs.lower_alerts}} Low Alerts"
