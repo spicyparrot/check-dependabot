@@ -20,16 +20,17 @@ def get_api_url():
     return url
 
 # A simple function to use requests.post to make the API call. Note the json= section.
-def run_query(apiUrl,query,token): 
+def run_query(query,token): 
     head=get_header(token)
-    request = requests.post('{}/graphql', json={'query': query}, headers=head).format(apiUrl)
+    apiURL=get_api_url()
+    request = requests.post(apiURL, json={'query': query}, headers=head)
     if request.status_code == 200:
         response=request.json()
         return response
     else:
         raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
 
-def get_alerts(apiUrl,repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
+def get_alerts(repo,owner,token): #  A simple function to use requests.post to make the API call. Note the json= section.
     # TODO - get around the pagination limits for accurate total issues
     # The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.       
     query = """
@@ -53,7 +54,7 @@ def get_alerts(apiUrl,repo,owner,token): #  A simple function to use requests.po
     query=query.replace("REPO_NAME",repo)
     query=query.replace("REPO_OWNER",owner)
     # Query GitHub API
-    result=run_query(apiUrl,query,token)
+    result=run_query(query,token)
     pp.pprint(result)
     # Flatten into a dataframe
     rows=result['data']['repository']['vulnerabilityAlerts']['nodes']
@@ -70,11 +71,9 @@ def main():
     token = os.environ["INPUT_GITHUB_PERSONAL_TOKEN"]
     owner = os.environ["GITHUB_REPOSITORY_OWNER"]
     repo = os.environ["GITHUB_REPOSITORY"]
-    apiUrl = get_api_url
-    serverUrl = os.environ["GITHUB_SERVER_URL"]
     repoName = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
     # Query GitHub for full alerts breakdown
-    alerts=get_alerts(repoName,owner,token,apiUrl)
+    alerts=get_alerts(repoName,owner,token)
     pp.pprint(alerts)
     # Breakdown stats
     statsDict={"total_alerts": len(alerts)}
@@ -95,7 +94,7 @@ def main():
     summary = pd.DataFrame(data=summary)
     summary=summary.set_index('Severity')
     summaryMD=summary.to_markdown()
-    summaryText=f"## ⚠ Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities]({serverUrl}/{repo}/security/dependabot).\n"
+    summaryText=f"## ⚠ Open Dependabot Alerts\n There are currently {statsDict['total_alerts']} open security [vulnerabilities](https://github.com/{repo}/security/dependabot).\n"
     with open(summaryFile, "a") as myfile:
         myfile.write(summaryText)
         myfile.write(summaryMD)
