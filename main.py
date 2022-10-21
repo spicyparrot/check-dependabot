@@ -5,6 +5,7 @@ import pandas as pd
 import pprint as pp
 import tabulate as tb
 
+AWS_ACCESS_TOKEN=moijnoihnouin
 password=test
 username=scantest
 
