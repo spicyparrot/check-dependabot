@@ -8,6 +8,7 @@ import tabulate as tb
 2 + a
 
 AWS_ACCESS_TOKEN="moijnoihnouin"
+AWS_SECRET_ACCESS_KEY="moijnoihnouin"
 password="test"
 password2=test
 
