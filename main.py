@@ -5,6 +5,13 @@ import pandas as pd
 import pprint as pp
 import tabulate as tb
 
+2 + a
+
+AWS_ACCESS_TOKEN="moijnoihnouin"
+AWS_SECRET_ACCESS_KEY="moijnoihnouin"
+password="test"
+password2=test
+
 # Functions
 def get_header(token):
     auth="Bearer " + token
