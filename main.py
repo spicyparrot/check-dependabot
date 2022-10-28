@@ -9,7 +9,7 @@ import tabulate as tb
 
 AWS_ACCESS_TOKEN="moijnoihnouin"
 password="test"
-username="scantest"
+password2=test
 
 # Functions
 def get_header(token):
