@@ -85,11 +85,11 @@ def main():
     statsDict['low_alerts']=len(alerts.loc[alerts['severity'] == 'LOW'])
     pp.pprint(statsDict)
     #Set Outputs
-    print(f"::set-output name=total_alerts::{statsDict['total_alerts']}")
-    print(f"::set-output name=critical_alerts::{statsDict['critical_alerts']}")
-    print(f"::set-output name=high_alerts::{statsDict['high_alerts']}")
-    print(f"::set-output name=moderate_alerts::{statsDict['moderate_alerts']}")
-    print(f"::set-output name=low_alerts::{statsDict['low_alerts']}")
+    print(f"total_alerts={statsDict['total_alerts']} >> $GITHUB_OUTPUT")
+    print(f"critical_alerts={statsDict['critical_alerts']} >> $GITHUB_OUTPUT")
+    print(f"high_alerts={statsDict['high_alerts']} >> $GITHUB_OUTPUT")
+    print(f"moderate_alerts={statsDict['moderate_alerts']} >> $GITHUB_OUTPUT")
+    print(f"low_alerts={statsDict['low_alerts']} >> $GITHUB_OUTPUT")
     #Create markdown summary
     summaryFile = os.environ["GITHUB_STEP_SUMMARY"]  #https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
     summary = {'Severity': ['CRITICAL','HIGH','MODERATE','LOW'], 'Open Issues': list( map(statsDict.get,['critical_alerts','high_alerts','moderate_alerts','low_alerts']))}
