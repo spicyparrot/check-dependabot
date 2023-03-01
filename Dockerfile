@@ -1,5 +1,5 @@
 # Minimal python
-FROM python:3.8.10-slim AS builder
+FROM python:3.11.2-slim AS builder
 
 # Add repo code & install dependencies
 ADD . /app
