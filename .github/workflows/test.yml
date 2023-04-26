@@ -22,8 +22,8 @@ jobs:
           pip install -r requirements.txt
           pylint main.py -E
 
-  test:
-    name: 🔬 Test Action
+  test-local:
+    name: 🔬 Test Local Action
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -43,13 +43,20 @@ jobs:
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
-      - name: View Outputs
-        run: |
-          echo "::warning ::${{steps.alerts.outputs.total_alerts}} Open Vulnerability Alerts"
-          echo "::warning ::${{steps.alerts.outputs.critical_alerts}} Critical Alerts "
-          echo "::warning ::${{steps.alerts.outputs.high_alerts}} High Alerts"
-          echo "::warning ::${{steps.alerts.outputs.moderate_alerts}} Moderate Alerts"
-          echo "::warning ::${{steps.alerts.outputs.lower_alerts}} Low Alerts"
+      - name: 🐛 Debugger
+        if: failure()
+        uses: mxschmitt/action-tmate@v3     #https://github.com/marketplace/actions/debugging-with-tmate  + https://blog.fleetdm.com/4-tips-for-github-actions-usability-2-debugging-4c0c920adfde
+        timeout-minutes: 5
+
+  test-trunk:
+    name: 🔬 Test Trunk Action
+    runs-on: ubuntu-latest
+    steps:      
+      - name: Check Dependabot Alerts
+        id: alerts
+        uses: spicyparrot/check-dependabot@trunk
+        with:
+          github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
       - name: 🐛 Debugger
         if: failure()
