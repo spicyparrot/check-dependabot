@@ -28,10 +28,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          path: action
       
       - name: Check Dependabot Alerts
         id: alerts
-        uses: spicyparrot/check-dependabot@trunk              # Check out yourself to test
+        uses: ./action            # Check out yourself to test
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
