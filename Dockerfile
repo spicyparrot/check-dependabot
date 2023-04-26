@@ -8,4 +8,5 @@ RUN python3 -m pip install -r requirements.txt
 
 # Start command
 ENTRYPOINT ["python3"]
-CMD ["main.py"]
+ENV PYTHONPATH /app
+CMD ["/app/main.py"]
