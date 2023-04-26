@@ -74,9 +74,11 @@ def main():
     owner = os.environ["GITHUB_REPOSITORY_OWNER"]
     repo = os.environ["GITHUB_REPOSITORY"]
     repoName = repo.split("/")[-1]                      #  Cleans the in-case we get 'owner/repo' format
+    
     # Query GitHub for full alerts breakdown
     alerts=get_alerts(repoName,owner,token)
     pp.pprint(alerts)
+    
     # Breakdown stats
     statsDict={"total_alerts": len(alerts)}
     statsDict['critical_alerts']=len(alerts.loc[alerts['severity'] == 'CRITICAL'])
@@ -84,13 +86,17 @@ def main():
     statsDict['moderate_alerts']=len(alerts.loc[alerts['severity'] == 'MODERATE'])
     statsDict['low_alerts']=len(alerts.loc[alerts['severity'] == 'LOW'])
     pp.pprint(statsDict)
-    #Set Outputs
-    print(f"::set-output name=total_alerts::{statsDict['total_alerts']}")
-    print(f"::set-output name=critical_alerts::{statsDict['critical_alerts']}")
-    print(f"::set-output name=high_alerts::{statsDict['high_alerts']}")
-    print(f"::set-output name=moderate_alerts::{statsDict['moderate_alerts']}")
-    print(f"::set-output name=low_alerts::{statsDict['low_alerts']}")
-    #Create markdown summary
+    
+    # Set Outputs (https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/_
+    outputFile = os.environ["GITHUB_OUTPUT"]
+    with open(outputFile, "a") as file:
+        file.write(f"total_alerts={statsDict['total_alerts']}")
+        file.write(f"critical_alerts={statsDict['critical_alerts']}")
+        file.write(f"high_alerts={statsDict['high_alerts']}")
+        file.write(f"moderate_alerts={statsDict['moderate_alerts']}")
+        file.write(f"low_alerts={statsDict['low_alerts']}")
+    
+    # Create markdown summary
     summaryFile = os.environ["GITHUB_STEP_SUMMARY"]  #https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
     summary = {'Severity': ['CRITICAL','HIGH','MODERATE','LOW'], 'Open Issues': list( map(statsDict.get,['critical_alerts','high_alerts','moderate_alerts','low_alerts']))}
     summary = pd.DataFrame(data=summary)
