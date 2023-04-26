@@ -28,12 +28,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          path: action
+
+      - name: Setup Action Locally
+        run: |
+          mkdir -p .github/actions/check_dependabot
+          cp main.py .github/actions/check_dependabot/
+          cp Dockerfile .github/actions/check_dependabot/
+          cp requirements.txt .github/actions/check_dependabot/
+          cp action.yml .github/actions/check_dependabot/
       
       - name: Check Dependabot Alerts
         id: alerts
-        uses: ./action            # Check out yourself to test
+        uses: .github/actions/check_dependabot           # Check out yourself to test
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
