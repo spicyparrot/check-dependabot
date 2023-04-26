@@ -39,7 +39,7 @@ jobs:
       
       - name: Check Dependabot Alerts
         id: alerts
-        uses: .github/actions/check_dependabot           # Check out yourself to test
+        uses: ./.github/actions/check_dependabot           # Check out yourself to test
         with:
           github_personal_token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}  
 
