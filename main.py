@@ -5,6 +5,9 @@ import pandas as pd
 import pprint as pp
 import tabulate as tb
 
+username="testuser"
+password="test"
+
 # Functions
 def get_header(token):
     auth="Bearer " + token
